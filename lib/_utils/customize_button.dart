@@ -7,13 +7,12 @@ class Mycustomizebutton extends StatelessWidget {
   final VoidCallback onPressed;
 
   const Mycustomizebutton({
-   super.key, 
-   required this.text,
-   required this.onPressed,
-   required this.buttoncolor,
-   required this.buttontextcolor,
-   
-   });
+    super.key,
+    required this.text,
+    required this.onPressed,
+    required this.buttoncolor,
+    required this.buttontextcolor,
+  });
 
   @override
   Widget build(BuildContext context) {
