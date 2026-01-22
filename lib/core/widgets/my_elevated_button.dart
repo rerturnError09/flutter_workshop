@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 
-class Mycustomizebutton extends StatelessWidget {
+class MyElevatedButton extends StatelessWidget {
   final String text;
   final Color buttoncolor;
   final Color buttontextcolor;
   final VoidCallback onPressed;
 
-  const Mycustomizebutton({
-   super.key, 
-   required this.text,
-   required this.onPressed,
-   required this.buttoncolor,
-   required this.buttontextcolor,
-   
-   });
+  const MyElevatedButton({
+    super.key,
+    required this.text,
+    required this.onPressed,
+    required this.buttoncolor,
+    required this.buttontextcolor,
+  });
 
   @override
   Widget build(BuildContext context) {

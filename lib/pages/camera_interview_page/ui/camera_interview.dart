@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class Mystartinterviewpage extends StatefulWidget {
-  const Mystartinterviewpage({super.key});
+class CameraInterview extends StatefulWidget {
+  const CameraInterview({super.key});
 
   @override
-  State<Mystartinterviewpage> createState() => _MystartinterviewpageState();
+  State<CameraInterview> createState() => _CameraInterviewState();
 }
 
-class _MystartinterviewpageState extends State<Mystartinterviewpage> {
+class _CameraInterviewState extends State<CameraInterview> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(

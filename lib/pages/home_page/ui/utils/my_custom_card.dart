@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:interview_app/core/extensions/sized_box_extension.dart';
 
-
-class FeatureCard extends StatelessWidget {
+class MyCustomCard extends StatelessWidget {
   final String title;
   final String description;
   final String buttonText;
@@ -10,7 +10,7 @@ class FeatureCard extends StatelessWidget {
   final Color backgroundColor;
   final VoidCallback onPressed; // This is the function parameter
 
-  const FeatureCard({
+  const MyCustomCard({
     super.key,
     required this.title,
     required this.description,
@@ -27,7 +27,7 @@ class FeatureCard extends StatelessWidget {
       padding: const EdgeInsets.all(20),
       child: Container(
         padding: const EdgeInsets.all(24),
-        width: double.infinity,
+        width: 350,
         decoration: BoxDecoration(
           color: backgroundColor, // Dynamic Color
           borderRadius: BorderRadius.circular(15),
@@ -36,7 +36,7 @@ class FeatureCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Icon(icon, size: 32), // Dynamic Icon
-            const SizedBox(height: 16),
+            16.ht,
             Text(
               title, // Dynamic Title
               style: const TextStyle(
@@ -45,7 +45,7 @@ class FeatureCard extends StatelessWidget {
                 color: Color(0xFF1A1A1A),
               ),
             ),
-            const SizedBox(height: 24),
+            24.ht,
             Text(
               description, // Dynamic Description
               style: const TextStyle(fontSize: 16, color: Colors.black54),
@@ -59,7 +59,7 @@ class FeatureCard extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: buttoncolor,
                   //  const Color(0xFF3F51B5),
-                  foregroundColor: Colors.white,//test color
+                  foregroundColor: Colors.white, //test color
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
