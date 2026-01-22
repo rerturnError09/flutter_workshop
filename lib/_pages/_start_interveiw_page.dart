@@ -27,27 +27,26 @@ class _MystartinterviewpageState extends State<Mystartinterviewpage> {
         ),
 
         body: Padding(
-          
           padding: const EdgeInsets.all(20),
           child: SizedBox(
             height: 250,
             child: Stack(
               children: [
-              Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                image: DecorationImage(
-                  image: AssetImage('assets/image.jpg'),
-                  fit: BoxFit.cover,
+                Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    image: DecorationImage(
+                      image: AssetImage('assets/image.jpg'),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ),
-              ),
-              ),
-              ]
+              ],
             ),
           ),
         ),
       ),
     );
   }
-} 
+}
