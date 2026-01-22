@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:interview_app/routes/routes.dart';
 
 void main() {
@@ -10,9 +11,13 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      debugShowCheckedModeBanner: false,
-      routerConfig: router, // Uses the router from router.dart
+    return ScreenUtilInit(
+      designSize: Size(390, 1002),
+      splitScreenMode: true,
+      builder: (_, child) => MaterialApp.router(
+        debugShowCheckedModeBanner: false,
+        routerConfig: router, // Uses the router from router.dart
+      ),
     );
   }
 }

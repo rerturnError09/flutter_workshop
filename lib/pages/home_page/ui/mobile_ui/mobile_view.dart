@@ -1,21 +1,14 @@
+//mobile view
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:interview_app/_utils/conatiner_button.dart';
+import 'package:interview_app/pages/home_page/ui/utils/my_custom_card.dart';
 
-class InterfacePage extends StatefulWidget {
-  const InterfacePage({super.key});
-
-  @override
-  State<InterfacePage> createState() => _InterfacePageState();
-}
-
-class _InterfacePageState extends State<InterfacePage> {
+class MobileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(onPressed: () {}, icon: Icon(Icons.person)),
-
         title: Padding(
           padding: const EdgeInsets.only(left: 40),
           child: Text(
@@ -30,7 +23,7 @@ class _InterfacePageState extends State<InterfacePage> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              FeatureCard(
+              MyCustomCard(
                 title: 'Camera Interview',
                 description:
                     "Practice live interviews with AI, focusing on visual cues and real-time feedback. Get personalized suggestions for improvement",
@@ -38,10 +31,10 @@ class _InterfacePageState extends State<InterfacePage> {
                 buttoncolor: const Color(0xFF3F51B5),
                 icon: Icons.camera_alt_outlined,
                 backgroundColor: const Color.fromARGB(255, 219, 226, 246),
-                onPressed: () => context.push('/_start_interveiw_page'),
+                onPressed: () => context.push('/CameraInterview'),
               ),
 
-              FeatureCard(
+              MyCustomCard(
                 title: 'Talk to AI',
                 description:
                     'Engage in voice or chat-based conversations with AI for flexible practice sessions. Refine your verbal responses.',
@@ -52,7 +45,7 @@ class _InterfacePageState extends State<InterfacePage> {
                 onPressed: () {},
               ),
 
-              FeatureCard(
+              MyCustomCard(
                 title: 'MCQ',
                 description:
                     'Test your knowledge with AI-generated multiple-choice questions on various topics. Strengthen your theoretical understanding.',

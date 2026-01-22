@@ -10,6 +10,10 @@ dependencies:
   flutter:
     sdk: flutter
   go_router: ^17.0.1
+  flutter_bloc: ^9.1.1
+  bloc: ^9.2.0
+  responsive_builder: ^0.7.1
+  flutter_screenutil: ^5.9.3
     
 
 dev_dependencies:
