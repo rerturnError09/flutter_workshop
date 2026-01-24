@@ -16,7 +16,7 @@ class MainApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (_, child) => MaterialApp.router(
         debugShowCheckedModeBanner: false,
-        routerConfig: router, // Uses the router from router.dart
+        routerConfig: router, 
       ),
     );
   }
