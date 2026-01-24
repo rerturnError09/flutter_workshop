@@ -1,5 +1,4 @@
 //mobile view
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -14,6 +13,9 @@ class MobileView extends StatelessWidget {
       buildWhen: (previous, current) => current is! HomeActionState,
       listener: (context, state) {
         if (state is CameraInterviewActionState) {
+          context.push('/CameraInterview');
+        }
+        else if (state is StartTalkToAiActionState) {
           context.push('/CameraInterview');
         }
       },
@@ -56,9 +58,8 @@ class MobileView extends StatelessWidget {
                 buttoncolor: const Color(0xFF25D1F4),
                 icon: Icons.mic,
                 backgroundColor: const Color.fromARGB(255, 219, 226, 246),
-                onPressed: () => context.pushNamed('talk-to-ai'),
+                onPressed: () => context.read<HomeBloc>().add(StartTalkToAiButtonClicked()),
               ),
-
                   MyCustomCard(
                     title: 'MCQ',
                     description:

@@ -1,6 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:interview_app/pages/camera_interview_page/ui/camera_interview.dart';
-import 'package:interview_app/pages/camera_interview_page/ui/start_talk_to_ai.dart';
+import 'package:interview_app/pages/talk_to_ai_page.dart/ui/start_talk_to_ai.dart';
 import 'package:interview_app/pages/home_page/ui/home.dart';
 
 final GoRouter router = GoRouter(

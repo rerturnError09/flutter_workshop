@@ -9,6 +9,7 @@ part 'home_state.dart';
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc() : super(HomeInitial()) {
     on<CameraInterviewButtonClicked>(cameraInterviewButtonClicked);
+    on<StartTalkToAiButtonClicked>(startTalkToAiButtonClicked);
   }
 
   FutureOr<void> cameraInterviewButtonClicked(
@@ -16,5 +17,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     Emitter<HomeState> emit,
   ) {
     emit(CameraInterviewActionState());
+  }
+
+  FutureOr<void> startTalkToAiButtonClicked(
+    StartTalkToAiButtonClicked event,
+    Emitter<HomeState> emit,
+  ) {
+    emit(StartTalkToAiActionState());
   }
 }
