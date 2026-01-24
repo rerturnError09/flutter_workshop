@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:interview_app/core/extensions/sized_box_extension.dart';
 
 class MyCustomCard extends StatelessWidget {
@@ -24,7 +25,7 @@ class MyCustomCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(20),
+      padding:  EdgeInsets.all(10.w),
       child: Container(
         padding: const EdgeInsets.all(24),
         width: 350,
@@ -39,9 +40,9 @@ class MyCustomCard extends StatelessWidget {
             16.ht,
             Text(
               title, // Dynamic Title
-              style: const TextStyle(
+              style:  TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 24,
+                fontSize: 15.sp,
                 color: Color(0xFF1A1A1A),
               ),
             ),
@@ -50,10 +51,10 @@ class MyCustomCard extends StatelessWidget {
               description, // Dynamic Description
               style: const TextStyle(fontSize: 16, color: Colors.black54),
             ),
-            const SizedBox(height: 24),
+            24.ht,
             SizedBox(
               width: double.infinity,
-              height: 49,
+              height: 49.h,
               child: ElevatedButton(
                 onPressed: onPressed, // Dynamic Function
                 style: ElevatedButton.styleFrom(

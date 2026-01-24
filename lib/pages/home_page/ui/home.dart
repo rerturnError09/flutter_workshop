@@ -16,8 +16,7 @@ class _HomeState extends State<Home> {
     return ScreenTypeLayout.builder(
       mobile: (_)=> MobileView(),
       desktop: (_) => DesktopView(),
+      // tablet: (_) => Tab(),
     );
   }
 }
-
-

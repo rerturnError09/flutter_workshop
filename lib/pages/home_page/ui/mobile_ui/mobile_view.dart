@@ -42,7 +42,7 @@ class MobileView extends StatelessWidget {
                 buttoncolor: const Color(0xFF25D1F4),
                 icon: Icons.mic,
                 backgroundColor: const Color.fromARGB(255, 219, 226, 246),
-                onPressed: () {},
+                onPressed: () => context.pushNamed('talk-to-ai'),
               ),
 
               MyCustomCard(
