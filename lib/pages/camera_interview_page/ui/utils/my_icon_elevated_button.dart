@@ -7,6 +7,7 @@ class MyIconElevatedButton extends StatelessWidget {
   final String text;
   final Color buttoncolor;
   final Color textcolor;
+  final VoidCallback onPressed;
 
   const MyIconElevatedButton({
     required this.iconData,
@@ -14,7 +15,7 @@ class MyIconElevatedButton extends StatelessWidget {
     required this.text,
     required this.buttoncolor,
     required this.textcolor,
-
+    required this.onPressed,
     super.key,
   });
 
@@ -23,7 +24,7 @@ class MyIconElevatedButton extends StatelessWidget {
     return SizedBox(
       height: 60.h,
       child: ElevatedButton.icon(
-        onPressed: () {},
+        onPressed: onPressed,
         icon: Icon(iconData, size: IconSize),
         label: Text(
           text,
@@ -45,4 +46,3 @@ class MyIconElevatedButton extends StatelessWidget {
     );
   }
 }
-

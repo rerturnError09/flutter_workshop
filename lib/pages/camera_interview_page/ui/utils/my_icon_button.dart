@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:interview_app/core/extensions/sized_box_extension.dart';
-import 'package:interview_app/pages/home_page/ui/utils/my_icon_elevated_button.dart';
+import 'package:interview_app/pages/camera_interview_page/ui/utils/my_icon_elevated_button.dart';
 
 class MyIconButton extends StatelessWidget {
   const MyIconButton({super.key});
@@ -36,6 +36,7 @@ class MyIconButton extends StatelessWidget {
           ),
           20.wt,
           MyIconElevatedButton(
+            onPressed: () {},
             iconData: Icons.cancel_sharp,
             IconSize: 30,
             text: 'End Session',
