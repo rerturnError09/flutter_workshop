@@ -6,7 +6,7 @@ import 'package:interview_app/pages/camera_interview_page/models/gemini_response
 
 class GeminiRepository  {
   //it won't work untill we enter valid api here. i removed the api on purpose
-  final String api = 'AIzaSyAJy2_RMeI6CZ5xTsl6tOp-JgtWFzIXM-w';
+  final String api = 'enter your api key here';
   Uri url = Uri.parse(
     'https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent',
   );
