@@ -1,10 +1,12 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:http/http.dart' as http;
 import 'package:interview_app/pages/camera_interview_page/models/gemini_response_model.dart';
 
+
 class GeminiRepository  {
   //it won't work untill we enter valid api here. i removed the api on purpose
-  final String api = 'enter your api key';
+  final String api = 'AIzaSyAJy2_RMeI6CZ5xTsl6tOp-JgtWFzIXM-w';
   Uri url = Uri.parse(
     'https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent',
   );
@@ -28,10 +30,26 @@ class GeminiRepository  {
         },
         body: body,
       );
-      final result = jsonDecode(response.body);
-      GeminiResponseModel(candidates: result['candidates']);
+    if(response.statusCode==200){
+      final Map<String,dynamic> result = jsonDecode(response.body);
+      log(result.toString());
+
+      //converting to post model
+      final post = Post.fromJson(result);
+
+      if(post.candidates.isNotEmpty){
+        final firstText = post.candidates.first.content.parts.first.text;
+        log('first reply:$firstText');
+      }
+      log(post.runtimeType.toString());
+      return post;
+    }else{
+      log('Error ${response.statusCode}: ${response.body}');
+      return null;
+    }
     } catch (e) {
       print(e);
+      return null;
     }
   }
 }

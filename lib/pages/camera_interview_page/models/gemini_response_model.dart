@@ -1,7 +1,23 @@
-class GeminiResponseModel {
-  final List<Candidate> candidates;
+import 'dart:convert';
 
-  GeminiResponseModel({required this.candidates});
+Post postFromJson(String str) => Post.fromJson(json.decode(str));
+
+String postToJson(Post data) => json.encode(data.toJson());
+
+class Post {
+  List<Candidate> candidates;
+
+  Post({required this.candidates});
+
+  factory Post.fromJson(Map<String, dynamic> json) => Post(
+    candidates: List<Candidate>.from(
+      json["candidates"].map((x) => Candidate.fromJson(x)),
+    ),
+  );
+
+  Map<String, dynamic> toJson() => {
+    "candidates": List<dynamic>.from(candidates.map((x) => x.toJson())),
+  };
 }
 
 class Candidate {
