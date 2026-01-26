@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
+import 'package:interview_app/pages/camera_interview_page/models/gemini_response_model.dart';
 import 'package:interview_app/pages/camera_interview_page/repo/gemini_repo.dart';
 
 import 'package:meta/meta.dart';
@@ -20,7 +21,9 @@ class CameraInterviewBloc
     Emitter<CameraInterviewState> emit,
   ) async {
     emit(CameraInterviewLoadingState());
-    await GeminiRepository().getResponse();
+    final Post geminiResponse = await GeminiRepository().getResponse();
+    emit(CameraInterviewLoadingSuccessState(geminiResponse: geminiResponse));
+    
   }
 
   FutureOr<void> cameraInterviewInitialEvent(

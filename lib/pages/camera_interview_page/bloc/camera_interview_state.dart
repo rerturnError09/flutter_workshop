@@ -14,4 +14,8 @@ final class CameraInterviewLoadingState extends CameraInterviewState {}
 
 final class CameraInterviewLoadingErrorState extends CameraInterviewState {}
 
-final class CameraInterviewLoadingSuccessState extends CameraInterviewState {}
+final class CameraInterviewLoadingSuccessState extends CameraInterviewState {
+  final Post geminiResponse;
+
+  CameraInterviewLoadingSuccessState({required this.geminiResponse});
+}
