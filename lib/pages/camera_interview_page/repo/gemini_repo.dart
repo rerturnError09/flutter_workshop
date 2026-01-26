@@ -20,7 +20,7 @@ class GeminiRepository  {
           ],
         });
 
-  Future getResponse() async {
+  Future<Post?> getResponse() async {
     try {
       final response = await http.post(
         url,

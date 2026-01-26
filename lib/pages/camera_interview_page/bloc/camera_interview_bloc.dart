@@ -21,9 +21,12 @@ class CameraInterviewBloc
     Emitter<CameraInterviewState> emit,
   ) async {
     emit(CameraInterviewLoadingState());
-    final Post geminiResponse = await GeminiRepository().getResponse();
-    emit(CameraInterviewLoadingSuccessState(geminiResponse: geminiResponse));
-    
+    final Post? geminiResponse = await GeminiRepository().getResponse();
+    if(geminiResponse == null){
+      emit(CameraInterviewLoadingErrorState());
+    }else{
+      emit(CameraInterviewLoadingSuccessState(geminiResponse: geminiResponse));
+    }
   }
 
   FutureOr<void> cameraInterviewInitialEvent(
