@@ -1,10 +1,8 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'package:http/http.dart' as http;
-import 'package:interview_app/pages/camera_interview_page/models/gemini_response_model.dart';
 
 class GeminiRepository {
-
   final List<Map<String, dynamic>> _contents = [];
 
   Uri url = Uri.parse(

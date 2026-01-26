@@ -24,9 +24,7 @@ class MobileUi extends StatelessWidget {
         }
         //loading success
         else if (state is CameraInterviewLoadingSuccessState) {
-          return LoadingSuccessMobileUi(
-            state: state,
-          );
+          return LoadingSuccessMobileUi(state: state);
         }
         //inital view
         else if (state is CameraInterviewInitial) {
