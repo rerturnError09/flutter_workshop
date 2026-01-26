@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:interview_app/core/extensions/sized_box_extension.dart';
 import 'package:interview_app/pages/camera_interview_page/bloc/camera_interview_bloc.dart';
 import 'package:interview_app/pages/camera_interview_page/ui/utils/my_icon_button.dart';
-import 'package:interview_app/pages/camera_interview_page/ui/utils/my_icon_elevated_button.dart';
 
 class LoadingSuccessMobileUi extends StatelessWidget {
   final state;
@@ -51,15 +50,11 @@ class LoadingSuccessMobileUi extends StatelessWidget {
                       ),
                     ),
 
-
-
-
-
-                    //for testing 
+                    //for testing
                     Column(
                       children: [
                         Padding(
-                           padding: const EdgeInsets.all(20),
+                          padding: const EdgeInsets.all(20),
                           child: TextField(
                             controller: answerController,
                             maxLines: 1,
@@ -67,18 +62,17 @@ class LoadingSuccessMobileUi extends StatelessWidget {
                               hintText: "Type your answer here...",
                             ),
                             onSubmitted: (value) async {
-    if (value.trim().isEmpty) return;
+                              if (value.trim().isEmpty) return;
 
-    // Call BLoC to handle candidate answer
-    context.read<CameraInterviewBloc>().add(
-      CandidateAnswerSubmittedEvent(answer: value),
-    );
+                              // Call BLoC to handle candidate answer
+                              context.read<CameraInterviewBloc>().add(
+                                CandidateAnswerSubmittedEvent(answer: value),
+                              );
 
-    answerController.clear();
-  },
+                              answerController.clear();
+                            },
                           ),
                         ),
-                       
                       ],
                     ),
                   ],

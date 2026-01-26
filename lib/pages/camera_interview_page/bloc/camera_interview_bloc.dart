@@ -8,15 +8,9 @@ part 'camera_interview_state.dart';
 
 class CameraInterviewBloc
     extends Bloc<CameraInterviewEvent, CameraInterviewState> {
-
-final GeminiRepository _geminiRepository = GeminiRepository();
-
+  final GeminiRepository _geminiRepository = GeminiRepository();
 
   CameraInterviewBloc() : super(CameraInterviewInitial()) {
-
-
-
-
     on<CameraInterviewInitialEvent>(cameraInterviewInitialEvent);
     on<StartCameraInterviewButtonTappedEvent>(
       startCameraInterviewButtonTappedEvent,
@@ -24,39 +18,25 @@ final GeminiRepository _geminiRepository = GeminiRepository();
     on<CandidateAnswerSubmittedEvent>(candidateAnswerSubmittedEvent);
   }
 
+  FutureOr<void> startCameraInterviewButtonTappedEvent(
+    StartCameraInterviewButtonTappedEvent event,
+    Emitter<CameraInterviewState> emit,
+  ) async {
+    emit(CameraInterviewLoadingState());
 
+    // STEP 1: Initialize interview
+    _geminiRepository.startInterview();
 
+    // STEP 2: Ask first question
+    final String? firstQuestion = await _geminiRepository.sendToGemini();
 
- FutureOr<void> startCameraInterviewButtonTappedEvent(
-  StartCameraInterviewButtonTappedEvent event,
-  Emitter<CameraInterviewState> emit,
-) async {
-  emit(CameraInterviewLoadingState());
+    if (firstQuestion == null) {
+      emit(CameraInterviewLoadingErrorState());
+      return;
+    }
 
-  // STEP 1: Initialize interview
-  _geminiRepository.startInterview();
-
-  // STEP 2: Ask first question
-  final String? firstQuestion =
-      await _geminiRepository.sendToGemini();
-
-  if (firstQuestion == null) {
-    emit(CameraInterviewLoadingErrorState());
-    return;
+    emit(CameraInterviewLoadingSuccessState(question: firstQuestion));
   }
-
-  emit(
-    CameraInterviewLoadingSuccessState(
-      question: firstQuestion,
-    ),
-  );
-}
-
-
-
-
-
-
 
   FutureOr<void> cameraInterviewInitialEvent(
     CameraInterviewInitialEvent event,
@@ -65,30 +45,21 @@ final GeminiRepository _geminiRepository = GeminiRepository();
     emit(CameraInterviewInitial());
   }
 
-
-
-
-
-  
-FutureOr<void> candidateAnswerSubmittedEvent(
+  FutureOr<void> candidateAnswerSubmittedEvent(
     CandidateAnswerSubmittedEvent event,
-    Emitter<CameraInterviewState> emit) async {
-  emit(CameraInterviewLoadingState());
+    Emitter<CameraInterviewState> emit,
+  ) async {
+    emit(CameraInterviewLoadingState());
 
-  final String? nextQuestion =
-      await _geminiRepository.sendCandidateAnswer(event.answer);
+    final String? nextQuestion = await _geminiRepository.sendCandidateAnswer(
+      event.answer,
+    );
 
-  if (nextQuestion == null) {
-    emit(CameraInterviewLoadingErrorState());
-    return;
+    if (nextQuestion == null) {
+      emit(CameraInterviewLoadingErrorState());
+      return;
+    }
+
+    emit(CameraInterviewLoadingSuccessState(question: nextQuestion));
   }
-
-  emit(CameraInterviewLoadingSuccessState(
-    question: nextQuestion,
-  ));
 }
-
-}
-
-
-
