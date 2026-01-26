@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:interview_app/core/extensions/sized_box_extension.dart';
+import 'package:interview_app/pages/camera_interview_page/bloc/camera_interview_bloc.dart';
 import 'package:interview_app/pages/camera_interview_page/ui/utils/my_icon_button.dart';
+import 'package:interview_app/pages/camera_interview_page/ui/utils/my_icon_elevated_button.dart';
 
 class LoadingSuccessMobileUi extends StatelessWidget {
   final state;
-  const LoadingSuccessMobileUi({super.key,required this.state});
+  final TextEditingController answerController = TextEditingController();
+  LoadingSuccessMobileUi({super.key, required this.state});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +33,7 @@ class LoadingSuccessMobileUi extends StatelessWidget {
             children: [
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.4,
-        
+
                 child: Stack(
                   children: [
                     Padding(
@@ -46,10 +50,41 @@ class LoadingSuccessMobileUi extends StatelessWidget {
                         ),
                       ),
                     ),
+
+
+
+
+
+                    //for testing 
+                    Column(
+                      children: [
+                        Padding(
+                           padding: const EdgeInsets.all(20),
+                          child: TextField(
+                            controller: answerController,
+                            maxLines: 1,
+                            decoration: InputDecoration(
+                              hintText: "Type your answer here...",
+                            ),
+                            onSubmitted: (value) async {
+    if (value.trim().isEmpty) return;
+
+    // Call BLoC to handle candidate answer
+    context.read<CameraInterviewBloc>().add(
+      CandidateAnswerSubmittedEvent(answer: value),
+    );
+
+    answerController.clear();
+  },
+                          ),
+                        ),
+                       
+                      ],
+                    ),
                   ],
                 ),
               ),
-        
+
               Padding(
                 padding: const EdgeInsets.only(left: 20, right: 20),
                 child: Column(
@@ -68,7 +103,7 @@ class LoadingSuccessMobileUi extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                "AI Prompt",
+                                "Ai Response(Question)",
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 20,

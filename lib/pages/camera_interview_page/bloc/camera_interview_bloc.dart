@@ -21,6 +21,7 @@ final GeminiRepository _geminiRepository = GeminiRepository();
     on<StartCameraInterviewButtonTappedEvent>(
       startCameraInterviewButtonTappedEvent,
     );
+    on<CandidateAnswerSubmittedEvent>(candidateAnswerSubmittedEvent);
   }
 
 
@@ -63,4 +64,31 @@ final GeminiRepository _geminiRepository = GeminiRepository();
   ) {
     emit(CameraInterviewInitial());
   }
+
+
+
+
+
+  
+FutureOr<void> candidateAnswerSubmittedEvent(
+    CandidateAnswerSubmittedEvent event,
+    Emitter<CameraInterviewState> emit) async {
+  emit(CameraInterviewLoadingState());
+
+  final String? nextQuestion =
+      await _geminiRepository.sendCandidateAnswer(event.answer);
+
+  if (nextQuestion == null) {
+    emit(CameraInterviewLoadingErrorState());
+    return;
+  }
+
+  emit(CameraInterviewLoadingSuccessState(
+    question: nextQuestion,
+  ));
 }
+
+}
+
+
+

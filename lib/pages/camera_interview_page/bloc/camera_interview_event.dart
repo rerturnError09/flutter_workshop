@@ -6,3 +6,10 @@ sealed class CameraInterviewEvent {}
 class CameraInterviewInitialEvent extends CameraInterviewEvent{}
 
 class StartCameraInterviewButtonTappedEvent extends CameraInterviewEvent {}
+
+class CandidateAnswerSubmittedEvent extends CameraInterviewEvent {
+  final String answer;
+
+  CandidateAnswerSubmittedEvent({required this.answer});
+}
+
