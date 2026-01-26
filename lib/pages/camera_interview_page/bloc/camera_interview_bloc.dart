@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
-import 'package:interview_app/pages/camera_interview_page/models/gemini_response_model.dart';
 import 'package:interview_app/pages/camera_interview_page/repo/gemini_repo.dart';
 
 import 'package:meta/meta.dart';
@@ -9,22 +8,54 @@ part 'camera_interview_state.dart';
 
 class CameraInterviewBloc
     extends Bloc<CameraInterviewEvent, CameraInterviewState> {
+
+final GeminiRepository _geminiRepository = GeminiRepository();
+
+
   CameraInterviewBloc() : super(CameraInterviewInitial()) {
+
+
+
+
     on<CameraInterviewInitialEvent>(cameraInterviewInitialEvent);
     on<StartCameraInterviewButtonTappedEvent>(
       startCameraInterviewButtonTappedEvent,
     );
   }
 
-  FutureOr<void> startCameraInterviewButtonTappedEvent(
-    StartCameraInterviewButtonTappedEvent event,
-    Emitter<CameraInterviewState> emit,
-  ) async {
-    emit(CameraInterviewLoadingState());
-    final Post geminiResponse = await GeminiRepository().getResponse();
-    emit(CameraInterviewLoadingSuccessState(geminiResponse: geminiResponse));
-    
+
+
+
+ FutureOr<void> startCameraInterviewButtonTappedEvent(
+  StartCameraInterviewButtonTappedEvent event,
+  Emitter<CameraInterviewState> emit,
+) async {
+  emit(CameraInterviewLoadingState());
+
+  // STEP 1: Initialize interview
+  _geminiRepository.startInterview();
+
+  // STEP 2: Ask first question
+  final String? firstQuestion =
+      await _geminiRepository.sendToGemini();
+
+  if (firstQuestion == null) {
+    emit(CameraInterviewLoadingErrorState());
+    return;
   }
+
+  emit(
+    CameraInterviewLoadingSuccessState(
+      question: firstQuestion,
+    ),
+  );
+}
+
+
+
+
+
+
 
   FutureOr<void> cameraInterviewInitialEvent(
     CameraInterviewInitialEvent event,

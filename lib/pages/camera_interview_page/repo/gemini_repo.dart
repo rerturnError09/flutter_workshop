@@ -6,50 +6,96 @@ import 'package:interview_app/pages/camera_interview_page/models/gemini_response
 
 class GeminiRepository  {
   //it won't work untill we enter valid api here. i removed the api on purpose
-  final String api = 'enter your api key here';
+  final String api = 'AIzaSyDPtq4RWOqFafr_pCGDLDQV6Qo9LrKSZcc';
+
+
+final List<Map<String, dynamic>> _contents = [];
+
+
+
+
   Uri url = Uri.parse(
     'https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent',
   );
+
+
+
+  Future<String?> sendToGemini() async {
   final body = jsonEncode({
-          'contents': [
-            {
-              'parts': [
-                {'text': 'hii, reply one word only'},
-              ],
-            },
-          ],
-        });
+    "contents": _contents,
+  });
 
-  Future getResponse() async {
-    try {
-      final response = await http.post(
-        url,
-        headers: {
-          'x-goog-api-key': api,
-          'contentType': 'application/json',
-        },
-        body: body,
-      );
-    if(response.statusCode==200){
-      final Map<String,dynamic> result = jsonDecode(response.body);
-      log(result.toString());
+  try {
+    final response = await http.post(
+      url,
+      headers: {
+        'x-goog-api-key': 'AIzaSyDPtq4RWOqFafr_pCGDLDQV6Qo9LrKSZcc',
+        'Content-Type': 'application/json',
+      },
+      body: body,
+    );
 
-      //converting to post model
+    if (response.statusCode == 200) {
+      final result = jsonDecode(response.body);
       final post = Post.fromJson(result);
 
-      if(post.candidates.isNotEmpty){
-        final firstText = post.candidates.first.content.parts.first.text;
-        log('first reply:$firstText');
-      }
-      log(post.runtimeType.toString());
-      return post;
-    }else{
+      final reply =
+          post.candidates.first.content.parts.first.text;
+
+      // Store Gemini reply in memory
+      _contents.add({
+        "role": "model",
+        "parts": [
+          {"text": reply}
+        ]
+      });
+      log(reply);
+      return reply;
+    } else {
       log('Error ${response.statusCode}: ${response.body}');
       return null;
     }
-    } catch (e) {
-      print(e);
-      return null;
-    }
+  } catch (e) {
+    log(e.toString());
+    return null;
   }
+}
+
+
+
+
+
+
+
+
+
+
+void startInterview() {
+  _contents.clear();
+
+  _contents.add({
+  "role": "user",
+  "parts": [
+    {
+      "text": """
+You are a professional Flutter interviewer.
+
+Rules:
+- Ask ONE question at a time.
+- Only ask Flutter-related questions.
+- Do NOT give hints, answers, or explanations.
+- Wait for the candidate’s reply.
+- After each reply, summarize key points and then ask the next Flutter question.
+
+Start the interview now by asking the first Flutter question.
+"""
+    }
+  ]
+});
+
+}
+
+
+
+
 }
