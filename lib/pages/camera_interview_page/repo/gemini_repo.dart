@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'package:http/http.dart' as http;
-// AIzaSyCgMDH9DkwTNSIEHDeuGmuEVBil8QQ17Fk
 
 class GeminiRepository {
   final List<Map<String, dynamic>> _contents = [];
@@ -19,7 +18,7 @@ class GeminiRepository {
         url,
         headers: {
           //it won't work untill we enter valid api here. i removed the api on purpose
-          'x-goog-api-key': '',
+          'x-goog-api-key': 'Enter your api key',
           'Content-Type': 'application/json',
         },
         body: body,
