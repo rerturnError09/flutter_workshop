@@ -16,6 +16,7 @@ class CameraInterviewBloc
       startCameraInterviewButtonTappedEvent,
     );
     on<CandidateAnswerSubmittedEvent>(candidateAnswerSubmittedEvent);
+    on<AskInterviewDetailsEvent>(askInterviewDetailsEvent);
   }
 
   FutureOr<void> startCameraInterviewButtonTappedEvent(
@@ -23,9 +24,12 @@ class CameraInterviewBloc
     Emitter<CameraInterviewState> emit,
   ) async {
     emit(CameraInterviewLoadingState());
-
     // STEP 1: Initialize interview
-    _geminiRepository.startInterview();
+    _geminiRepository.startInterview(
+      InterviewTopic: event.InterviewTopic,
+      candidateName: event.candidateName,
+      difficultyLevel: event.difficultyLevel,
+    );
 
     // STEP 2: Ask first question
     final String? firstQuestion = await _geminiRepository.sendToGemini();
@@ -61,5 +65,12 @@ class CameraInterviewBloc
     }
 
     emit(CameraInterviewLoadingSuccessState(question: nextQuestion));
+  }
+
+  FutureOr<void> askInterviewDetailsEvent(
+    AskInterviewDetailsEvent event,
+    Emitter<CameraInterviewState> emit,
+  ) {
+    emit(AskInterviewDetailsState());
   }
 }

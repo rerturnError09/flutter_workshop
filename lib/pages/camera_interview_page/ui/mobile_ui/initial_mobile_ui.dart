@@ -3,14 +3,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:interview_app/core/extensions/sized_box_extension.dart';
 import 'package:interview_app/pages/camera_interview_page/bloc/camera_interview_bloc.dart';
-import 'package:interview_app/pages/camera_interview_page/ui/utils/my_icon_button.dart';
 import 'package:interview_app/pages/camera_interview_page/ui/utils/my_icon_elevated_button.dart';
 
 class InitialMobileUi extends StatelessWidget {
-  const InitialMobileUi({super.key});
+  InitialMobileUi({super.key});
 
   @override
   Widget build(BuildContext context) {
+  
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -49,9 +50,7 @@ class InitialMobileUi extends StatelessWidget {
                   ),
                   Center(
                     child: MyIconElevatedButton(
-                      onPressed: () => context.read<CameraInterviewBloc>().add(
-                        StartCameraInterviewButtonTappedEvent(),
-                      ),
+                      onPressed: () {context.read<CameraInterviewBloc>().add(AskInterviewDetailsEvent());},
                       iconData: Icons.play_arrow_outlined,
                       IconSize: 35,
                       text: 'Start Interveiw',
@@ -104,8 +103,6 @@ class InitialMobileUi extends StatelessWidget {
               ),
             ),
             10.ht,
-            //call of icon button
-            MyIconButton(),
           ],
         ),
       ),
