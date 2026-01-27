@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'package:http/http.dart' as http;
+// AIzaSyCgMDH9DkwTNSIEHDeuGmuEVBil8QQ17Fk
 
 class GeminiRepository {
   final List<Map<String, dynamic>> _contents = [];
@@ -13,11 +14,12 @@ class GeminiRepository {
     final body = jsonEncode({"contents": _contents});
 
     try {
+      log('body: contents:{${_contents}}');
       final response = await http.post(
         url,
         headers: {
           //it won't work untill we enter valid api here. i removed the api on purpose
-          'x-goog-api-key': 'Enter your key',
+          'x-goog-api-key': '',
           'Content-Type': 'application/json',
         },
         body: body,
@@ -88,7 +90,11 @@ class GeminiRepository {
     return nextQuestion;
   }
 
-  void startInterview() {
+  void startInterview({
+    required final String candidateName,
+    required final String InterviewTopic,
+    required final String difficultyLevel,
+  }) {
     _contents.clear();
 
     _contents.add({
@@ -96,17 +102,35 @@ class GeminiRepository {
       "parts": [
         {
           "text": """
-You are a professional Flutter interviewer.
+You are a professional technical interviewer.
 
-Rules:
-- Ask ONE question at a time.
-- Only ask Flutter-related questions.
-- Do NOT give hints, answers, or explanations.
-- Wait for the candidate’s reply.
-- and your text will be directly been told to candidate so dont use word candidate instead adress him personal but respectful
-- After each reply, summarize key points and then ask the next Flutter question.
+Interview details:
+- Candidate Name: $candidateName
+- Interview Topic: $InterviewTopic
+- Difficulty Level: $difficultyLevel
 
-Start the interview now by asking the first Flutter question.
+Instructions:
+1. Act strictly as an interviewer. This interview will be conducted using text-to-speech and speech-to-text, so keep questions clear, concise, and spoken-language friendly.
+2. Ask one question at a time and wait for the candidate’s response before continuing.
+3. Adjust follow-up questions based on the candidate’s answers while staying within the given topic and difficulty level.
+4. If the candidate goes off-topic, politely redirect them back to the interview topic.
+5. Do NOT switch roles, do NOT explain answers unless explicitly required for evaluation.
+6. Continue the interview until the candidate sends the exact message: "End Interview".
+
+Ending Instructions:
+- When the message "End Interview" is received, stop asking questions immediately.
+- Generate a **professional interview report** that includes:
+   - Overall performance summary
+   - Strengths
+   - Weak areas
+   - Conceptual gaps
+   - Practical improvement suggestions
+   - Topics the candidate should revise
+   - Mock questions for further practice
+   - Final readiness assessment based on the selected difficulty level
+
+Maintain a formal, professional interviewer tone throughout the session.
+
 """,
         },
       ],

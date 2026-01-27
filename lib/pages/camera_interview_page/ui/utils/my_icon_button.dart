@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:interview_app/core/extensions/sized_box_extension.dart';
+import 'package:interview_app/pages/camera_interview_page/bloc/camera_interview_bloc.dart';
 import 'package:interview_app/pages/camera_interview_page/ui/utils/my_icon_elevated_button.dart';
 
 class MyIconButton extends StatelessWidget {
@@ -36,7 +38,12 @@ class MyIconButton extends StatelessWidget {
           ),
           20.wt,
           MyIconElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              final String answer = 'End Interview';
+              context.read<CameraInterviewBloc>().add(
+                CandidateAnswerSubmittedEvent(answer: answer),
+              );
+            },
             iconData: Icons.cancel_sharp,
             IconSize: 30,
             text: 'End Session',

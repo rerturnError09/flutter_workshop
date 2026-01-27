@@ -3,16 +3,23 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:interview_app/pages/camera_interview_page/bloc/camera_interview_bloc.dart';
 import 'package:interview_app/pages/camera_interview_page/ui/mobile_ui/initial_mobile_ui.dart';
 import 'package:interview_app/pages/camera_interview_page/ui/mobile_ui/loading_success_mobile_ui.dart';
+import 'package:interview_app/pages/camera_interview_page/ui/utils/initial_interview_detials_alert_box.dart';
 
 class MobileUi extends StatelessWidget {
   const MobileUi({super.key});
 
   @override
   Widget build(BuildContext context) {
+      final TextEditingController candidateName = TextEditingController();
+    final TextEditingController interviewTopic = TextEditingController();
     return BlocConsumer<CameraInterviewBloc, CameraInterviewState>(
       listenWhen: (previous, current) => current is CameraInterviewActionState,
       buildWhen: (previous, current) => current is! CameraInterviewActionState,
-      listener: (context, state) {},
+      listener: (context, state) {
+        if(state is AskInterviewDetailsState){
+          InitialInterviewDetialsAlertBox(candidateName: candidateName, interviewTopic: interviewTopic, parentContext: context);
+        }
+      },
       builder: (context, state) {
         //loading
         if (state is CameraInterviewLoadingState) {
