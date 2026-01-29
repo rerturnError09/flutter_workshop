@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:interview_app/pages/home_page/bloc/home_bloc.dart';
 import 'package:interview_app/pages/home_page/ui/utils/my_custom_card.dart';
+// import 'package:interview_app/pages/mcq_page/screens/quiz_screen.dart';
+
 
 class MobileView extends StatelessWidget {
   @override
@@ -11,20 +13,35 @@ class MobileView extends StatelessWidget {
     return BlocConsumer<HomeBloc, HomeState>(
       listenWhen: (previous, current) => current is HomeActionState,
       buildWhen: (previous, current) => current is! HomeActionState,
+  //     listener: (context, state) {
+  //       if (state is CameraInterviewActionState) {
+  //         context.push('/CameraInterview');
+  //       }
+  //       else if (state is StartTalkToAiActionState) {
+  //         context.push('/CameraInterview');
+  //       }
+  //       else if (State is MymcqActionState) {
+  //   context.push('/mcq');
+  // }
+  //     },
+
       listener: (context, state) {
-        if (state is CameraInterviewActionState) {
-          context.push('/CameraInterview');
-        }
-        else if (state is StartTalkToAiActionState) {
-          context.push('/CameraInterview');
-        }
-      },
+  if (state is CameraInterviewActionState) {
+    context.push('/CameraInterview');
+  } 
+  else if (state is StartTalkToAiActionState) {
+    context.push('/starttalktoai'); // FIX 1: Point to correct path, not Camera
+  } 
+   else if (state is StartTalkToAiActionState) {
+    context.push('/starttalktoai'); // FIX 1: Point to correct path, not Camera
+  } 
+  
+},
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
             leading: IconButton(onPressed: () {}, icon: Icon(Icons.person)),
-            title: Padding(
-              padding: const EdgeInsets.only(left: 40),
+            title: Center(
               child: Text(
                 "AI Interview Coach",
                 style: TextStyle(fontWeight: FontWeight.bold),
@@ -68,7 +85,7 @@ class MobileView extends StatelessWidget {
                     buttoncolor: const Color.fromARGB(255, 85, 132, 253),
                     icon: Icons.list,
                     backgroundColor: const Color.fromARGB(255, 219, 226, 246),
-                    onPressed: () {},
+                   onPressed: () => context.pushNamed('mcq'),
                   ),
                 ],
               ),

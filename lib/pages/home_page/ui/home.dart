@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:interview_app/pages/home_page/bloc/home_bloc.dart';
 import 'package:interview_app/pages/home_page/ui/desktop_ui/desktop_view.dart';
 import 'package:interview_app/pages/home_page/ui/mobile_ui/mobile_view.dart';
+import 'package:interview_app/pages/home_page/ui/tab_ui/tab_view.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 class Home extends StatefulWidget {
@@ -21,6 +21,7 @@ class _HomeState extends State<Home> {
       child: ScreenTypeLayout.builder(
         mobile: (_) => MobileView(),
         desktop: (_) => DesktopView(),
+        tablet: (_) => TabView(),
       ),
     );
   }

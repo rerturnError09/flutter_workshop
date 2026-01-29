@@ -1,6 +1,7 @@
 //desktop view
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:interview_app/core/extensions/sized_box_extension.dart';
 import 'package:interview_app/pages/home_page/ui/utils/my_custom_card.dart';
 
 class DesktopView extends StatelessWidget {
@@ -55,6 +56,10 @@ class DesktopView extends StatelessWidget {
                 backgroundColor: const Color.fromARGB(255, 219, 226, 246),
                 onPressed: () {},
               ),
+              50.ht,
+              // carsoul add from here 
+
+              
             ],
           ),
         ),

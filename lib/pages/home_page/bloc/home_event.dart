@@ -6,3 +6,4 @@ sealed class HomeEvent {}
 final class CameraInterviewButtonClicked extends HomeEvent {}
 
 final class StartTalkToAiButtonClicked extends HomeEvent {}
+

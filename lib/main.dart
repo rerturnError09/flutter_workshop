@@ -14,9 +14,11 @@ class MainApp extends StatelessWidget {
     return ScreenUtilInit(
       designSize: Size(390, 1002),
       splitScreenMode: true,
+
       builder: (_, child) => MaterialApp.router(
+        
         debugShowCheckedModeBanner: false,
-        routerConfig: router, 
+        routerConfig: router,
       ),
     );
   }
