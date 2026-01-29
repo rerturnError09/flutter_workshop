@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:bloc/bloc.dart';
 import 'package:interview_app/pages/talk_to_ai_page/repos/gemini_repository.dart';
 
@@ -25,7 +24,7 @@ class TalkToAiBloc extends Bloc<TalkToAiEvent, TalkToAiState> {
       return;
     }
     // STEP 1: Emit loading state
-    emit(TalkToAiLoadingState());
+    emit(TalkToAiLoadingState(responseMessage: List.from(_chatMessage)));
 
     // STEP 2: Add user message to UI list
     _chatMessage.add({'text': event.message, 'isUser': true});
@@ -39,23 +38,18 @@ class TalkToAiBloc extends Bloc<TalkToAiEvent, TalkToAiState> {
       'text': geminiResponse ?? "Error: No response from AI.",
       'isUser': false,
     });
-
+    // STEP 5: Emit success state with updated messages
     emit(MessageSentSuccessState(responseMessage: List.from(_chatMessage)));
   }
 
   FutureOr<void> chatStratedEvent(
     ChatStratedEvent event,
     Emitter<TalkToAiState> emit,
-  )async {
-    emit(TalkToAiLoadingState());
+  ) async {
+    emit(TalkToAiLoadingState(responseMessage: List.from(_chatMessage)));
     _geminiRepository.startChat();
     final welcomeMessage = await _geminiRepository.sendToGemini();
-    _chatMessage.add(
-      {
-        'text': welcomeMessage ,
-        'isUser': false,
-      }
-    );
+    _chatMessage.add({'text': welcomeMessage, 'isUser': false});
     emit(MessageSentSuccessState(responseMessage: List.from(_chatMessage)));
   }
 }

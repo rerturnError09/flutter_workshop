@@ -13,7 +13,11 @@ final class MessageSentSuccessState extends TalkToAiState {
   MessageSentSuccessState({required this.responseMessage});
 }
 
-final class TalkToAiLoadingState extends TalkToAiActionState {}
+final class TalkToAiLoadingState extends TalkToAiState {
+  final List<Map<String, dynamic>> responseMessage;
+
+  TalkToAiLoadingState({required this.responseMessage});
+}
 
 final class TalkToAiErrorState extends TalkToAiState {
   final String errorMessage;

@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:interview_app/core/constants/constants.dart';
 import 'package:interview_app/pages/home_page/bloc/home_bloc.dart';
 import 'package:interview_app/pages/home_page/ui/utils/my_custom_card.dart';
 
@@ -14,13 +15,54 @@ class MobileView extends StatelessWidget {
       listener: (context, state) {
         if (state is CameraInterviewActionState) {
           context.push('/CameraInterview');
-        }
-        else if (state is StartTalkToAiActionState) {
+        } else if (state is StartTalkToAiActionState) {
           context.push('/startTalkToAi');
         }
       },
       builder: (context, state) {
-        return Scaffold(
+        final parentContext =context;
+        if (state is ApiKeyState) {
+          final TextEditingController apiKeyController =
+              TextEditingController();
+          return Scaffold(
+            body: Center(
+              child: ElevatedButton(
+                child: Text('start the demo'),
+                onPressed: () => showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    title: Text("Enter Your Api key"),
+                    content: Text(
+                      "Don't worry entering api key here is safe. Your api key won't be stored anywhere. it's just to bypass buying paid api from google cloud console for demo purpose.",
+                    ),
+                    actions: [
+                      TextField(
+                        controller: apiKeyController,
+                        decoration: InputDecoration(
+                          hintText: "Enter API Key",
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          apiKey = apiKeyController.text;
+                          if(apiKey.isEmpty){
+                            context.pop();
+                          }else{
+                            parentContext.read<HomeBloc>().add(ApiKeyRecievedEvent());
+                            context.pop();
+                          }
+                        },
+                        child: Text("OK"),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          );
+        }
+        else if(state is HomeInitial){
+          return Scaffold(
           appBar: AppBar(
             leading: IconButton(onPressed: () {}, icon: Icon(Icons.person)),
             title: Padding(
@@ -50,16 +92,18 @@ class MobileView extends StatelessWidget {
                     ),
                   ),
 
-              MyCustomCard(
-                title: 'Talk to AI',
-                description:
-                    'Engage in voice or chat-based conversations with AI for flexible practice sessions. Refine your verbal responses.',
-                buttonText: 'Start Talk to AI',
-                buttoncolor: const Color(0xFF25D1F4),
-                icon: Icons.mic,
-                backgroundColor: const Color.fromARGB(255, 219, 226, 246),
-                onPressed: () => context.read<HomeBloc>().add(StartTalkToAiButtonClicked()),
-              ),
+                  MyCustomCard(
+                    title: 'Talk to AI',
+                    description:
+                        'Engage in voice or chat-based conversations with AI for flexible practice sessions. Refine your verbal responses.',
+                    buttonText: 'Start Talk to AI',
+                    buttoncolor: const Color(0xFF25D1F4),
+                    icon: Icons.mic,
+                    backgroundColor: const Color.fromARGB(255, 219, 226, 246),
+                    onPressed: () => context.read<HomeBloc>().add(
+                      StartTalkToAiButtonClicked(),
+                    ),
+                  ),
                   MyCustomCard(
                     title: 'MCQ',
                     description:
@@ -75,6 +119,9 @@ class MobileView extends StatelessWidget {
             ),
           ),
         );
+        } else {
+          return SizedBox.shrink();
+        }
       },
     );
   }
