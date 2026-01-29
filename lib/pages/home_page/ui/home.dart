@@ -17,9 +17,13 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => HomeBloc(),
+      create: (context) {
+        final bloc = HomeBloc();
+        bloc.add(ApiKeyEvent());
+        return bloc;
+      },
       child: ScreenTypeLayout.builder(
-        mobile: (_) => MobileView(),
+        mobile: (context) => MobileView(),
         desktop: (_) => DesktopView(),
       ),
     );

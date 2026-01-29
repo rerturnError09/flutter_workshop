@@ -9,4 +9,6 @@ abstract class HomeActionState extends HomeState {}
 
 final class CameraInterviewActionState extends HomeActionState {}
 
-final class StartTalkToAiActionState extends HomeState {}
+final class StartTalkToAiActionState extends HomeActionState {}
+
+final class ApiKeyState extends HomeState {}

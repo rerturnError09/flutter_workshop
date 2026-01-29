@@ -10,6 +10,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc() : super(HomeInitial()) {
     on<CameraInterviewButtonClicked>(cameraInterviewButtonClicked);
     on<StartTalkToAiButtonClicked>(startTalkToAiButtonClicked);
+    on<ApiKeyEvent>(apiKeyEvent);
+    on<ApiKeyRecievedEvent>(apiKeyRecievedEvent);
   }
 
   FutureOr<void> cameraInterviewButtonClicked(
@@ -24,5 +26,16 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     Emitter<HomeState> emit,
   ) {
     emit(StartTalkToAiActionState());
+  }
+
+  FutureOr<void> apiKeyEvent(ApiKeyEvent event, Emitter<HomeState> emit) {
+    emit(ApiKeyState());
+  }
+
+  FutureOr<void> apiKeyRecievedEvent(
+    ApiKeyRecievedEvent event,
+    Emitter<HomeState> emit,
+  ) {
+    emit(HomeInitial());
   }
 }
