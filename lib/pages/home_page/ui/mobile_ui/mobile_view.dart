@@ -16,7 +16,7 @@ class MobileView extends StatelessWidget {
           context.push('/CameraInterview');
         }
         else if (state is StartTalkToAiActionState) {
-          context.push('/CameraInterview');
+          context.push('/startTalkToAi');
         }
       },
       builder: (context, state) {

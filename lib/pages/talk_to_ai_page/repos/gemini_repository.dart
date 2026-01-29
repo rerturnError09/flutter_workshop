@@ -55,7 +55,7 @@ class GeminiRepository {
           ],
         });
 
-        log("Next question from Gemini: $reply");
+        log("reply from gemini: $reply");
         return reply;
       } else {
         log('Error ${response.statusCode}: ${response.body}');
@@ -77,23 +77,19 @@ class GeminiRepository {
   }
 
   Future<String?> sendCandidateAnswer(String answer) async {
-    // 1. Add candidate answer to memory
+    // 1. Add candidate message to memory
     addCandidateAnswer(answer);
     log('candidate answer:$answer');
 
     // 2. Send full memory to Gemini
-    final nextQuestion = await sendToGemini();
-    log('next question: $nextQuestion');
+    final geminiReply = await sendToGemini();
+    log('next question: $geminiReply');
 
     // 3. Return Gemini response (summary + next question)
-    return nextQuestion;
+    return geminiReply;
   }
 
-  void startInterview({
-    required final String candidateName,
-    required final String InterviewTopic,
-    required final String difficultyLevel,
-  }) {
+  void startChat() {
     _contents.clear();
 
     _contents.add({
@@ -101,35 +97,19 @@ class GeminiRepository {
       "parts": [
         {
           "text": """
-You are a professional technical interviewer.
+You are an AI chat companion for a user in a ai powered interview simulation app. Your role is to:
 
-Interview details:
-- Candidate Name: $candidateName
-- Interview Topic: $InterviewTopic
-- Difficulty Level: $difficultyLevel
+1. **Engage in natural, friendly conversation** with the user.
+2. **Answer questions clearly and helpfully** based on general knowledge.
+3. Keep responses **concise but informative**, around 2–5 sentences.
+4. **Do not ask the user for sensitive information** like passwords, personal documents, or financial info.
+5. **Distinguish between casual chat and guidance**: provide advice only when asked, otherwise respond conversationally.
+6. **Keep context of the current chat**: remember previous messages during this session for continuity.
+7. Format responses in plain text; do not add code unless explicitly requested.
+8. Optionally, provide **fun, engaging remarks** to make the chat interactive.
+9. this message is sent to you means the chat page is opened by the user so greet the user and offer help to start the chat.
 
-Instructions:
-1. Act strictly as an interviewer. This interview will be conducted using text-to-speech and speech-to-text, so keep questions clear, concise, and spoken-language friendly.
-2. Ask one question at a time and wait for the candidate’s response before continuing.
-3. Adjust follow-up questions based on the candidate’s answers while staying within the given topic and difficulty level.
-4. If the candidate goes off-topic, politely redirect them back to the interview topic.
-5. Do NOT switch roles, do NOT explain answers unless explicitly required for evaluation.
-6. Continue the interview until the candidate sends the exact message: "End Interview".
-
-Ending Instructions:
-- When the message "End Interview" is received, stop asking questions immediately.
-- Generate a **professional interview report** that includes:
-   - Overall performance summary
-   - Strengths
-   - Weak areas
-   - Conceptual gaps
-   - Practical improvement suggestions
-   - Topics the candidate should revise
-   - Mock questions for further practice
-   - Final readiness assessment based on the selected difficulty level
-
-Maintain a formal, professional interviewer tone throughout the session.
-
+Always be **polite, positive, and professional**, but casual enough to feel like a chat companion.
 """,
         },
       ],

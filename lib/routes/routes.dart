@@ -17,7 +17,7 @@ final GoRouter router = GoRouter(
     ),
     GoRoute(
       name: 'talk-to-ai', // Add a name
-      path: '/starttalktoai',
+      path: '/startTalkToAi',
       builder: (context, state) => const StartTalkToAi(),
     ),
   ],
