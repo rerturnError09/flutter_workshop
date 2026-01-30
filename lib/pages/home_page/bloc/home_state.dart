@@ -12,3 +12,5 @@ final class CameraInterviewActionState extends HomeActionState {}
 final class StartTalkToAiActionState extends HomeActionState {}
 
 final class ApiKeyState extends HomeState {}
+
+final class McqActionState extends HomeActionState {}
