@@ -79,7 +79,7 @@ class _QuizScreenState extends State<QuizScreen> {
                     );
                   },
                 ),
-                // Next Button
+                // Next Button:
                 isLastQuestion
                     ? RectangularButton(
                         onPressed: () {
