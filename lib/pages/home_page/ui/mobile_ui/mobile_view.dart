@@ -17,6 +17,8 @@ class MobileView extends StatelessWidget {
           context.push('/CameraInterview');
         } else if (state is StartTalkToAiActionState) {
           context.push('/startTalkToAi');
+        } else if (state is McqActionState) {
+          context.push('/Mcq');
         }
       },
       builder: (context, state) {
@@ -112,7 +114,9 @@ class MobileView extends StatelessWidget {
                     buttoncolor: const Color.fromARGB(255, 85, 132, 253),
                     icon: Icons.list,
                     backgroundColor: const Color.fromARGB(255, 219, 226, 246),
-                    onPressed: () {},
+                    onPressed: () => context.read<HomeBloc>().add(
+                      StartMcqButtonClicked(),
+                    ),
                   ),
                 ],
               ),
