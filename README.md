@@ -1,33 +1,72 @@
-# interview_app
+# 🎤 AI Interview Coach
 
-commit **bloc initalize**
+**An AI-powered interview practice platform with intelligent feedback**
 
-- improved file structure
-- bloc initalized
-- my_custom_card-> width= finite (TODO: make all the hard coded value in proportion with respect to h and w for height and width and sp for pixels)
-- [number].ht and [number].wt means height and widget of sized box
-- resposive_builder initialized
-  ```
-    ScreenTypeLayout.builder(
-    mobile: (_)=> MobileView(),// for  mobile screen
-    tablet: (_)=> TabletView(),// for tablet screen
-    desktop: (_) => DesktopView(),// for desktop screen
-  );
-  ```
-- adding an SizedBox Extenstion in lib/core/extensions/
+---
 
-  ```
-    use number.ht for SizedBox(height:number)
-    example- 20.ht
-  
-    use number.wt for SizedBox(width:number)
-    example- 20.wt
-  ```
+## 🚀 Overview
 
-- adding flutter_screenutil: ^5.9.3
-    ```
-    for height use .h
-    for width use .w
-    for padding use .p
-    for radius use .r
-    ```
+AI Interview Coach is a Flutter-based app designed to simulate real interview panels.  
+It allows users to practice interviews, receive structured feedback, and improve communication skills.
+
+The project focuses on **core interview intelligence**, with a roadmap for multimodal inputs like voice and camera analysis.
+
+---
+
+## 🎯 Problem
+
+Traditional interview prep is often:
+- Static (question banks)
+- One-way (no real conversation)
+- Generic (no personalized feedback)
+
+Candidates struggle to know **how they perform**, **where they are weak**, and **how to improve**.
+
+---
+
+## 💡 Solution
+
+- **Interactive AI Interview Chat**  
+  Gemini-based AI asks questions, follows up, and evaluates responses.
+- **Mock Interview Quiz**  
+  Predefined questions with structured evaluation.
+- **Prompt Engineering**  
+  Controlled AI behavior ensures realistic and useful interviews.
+- **Scalable Architecture**  
+  Easily extendable for speech and camera-based analysis.
+
+---
+
+## 🧪 Features Implemented
+
+- AI-driven interview chat
+- Mock quizzes with evaluation logic
+- Modular Flutter UI ready for extension
+- Prompt-engineered AI logic
+
+---
+
+## 🛣️ Planned Features
+
+- 🎙️ Speech-to-Text (STT) for verbal responses  
+- 🔊 Text-to-Speech (TTS) for AI interviewer  
+- 📷 Camera-based confidence & body-language analysis  
+- 📊 Advanced evaluation metrics: clarity, confidence, structure  
+
+---
+
+## 🏁 Why This Project Matters
+
+- Demonstrates real-world AI integration  
+- Shows system design and prompt engineering skills  
+- Prioritizes core functionality while enabling future multimodal features  
+
+---
+
+## 👨‍💻 Author
+
+**Prem Dilliwar  & Bhavesh Yadav**
+  - Flutter Developers | AI-Driven App Builders
+
+
+
